@@ -20,6 +20,9 @@
     "react": "*",
     "react-native": "*"
   },
+  "dependencies": {
+    "color-interpolate": "^1.0.5"
+  },
   "devDependencies": {
     "@types/react": "^16.9.19",
     "@types/react-native": "0.62.13",
@@ -49,7 +52,16 @@
       "typescript"
     ]
   },
-  "dependencies": {
-    "color-interpolate": "^1.0.5"
+  "keywords": [
+    "react",
+    "react-native",
+    "gradients",
+    "easing",
+    "smooth",
+    "expo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tienphaw/react-native-easing-gradient.git"
   }
 }
