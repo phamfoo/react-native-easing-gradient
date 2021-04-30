@@ -1,5 +1,7 @@
 # React Native Easing Gradient
 
+[![Stable Release](https://img.shields.io/npm/v/react-native-easing-gradient.svg)](https://npm.im/react-native-easing-gradient) [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
+
 Create smooth gradients in React Native
 
 ![](demo.png)
