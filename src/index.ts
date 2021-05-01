@@ -1,8 +1,6 @@
-import { Easing, EasingFunction } from 'react-native'
-import interpolate from 'color-interpolate'
-
-const easeInOut = Easing.bezier(0.42, 0, 0.58, 1)
-const TOTAL_STOPS_PER_STEP = 16
+import { Easing, EasingFunction, Animated } from 'react-native'
+// @ts-expect-error
+import AnimatedInterpolation from 'react-native/Libraries/Animated/src/nodes/AnimatedInterpolation'
 
 interface ColorStops {
   [location: number]: {
@@ -15,6 +13,11 @@ interface GradientParams {
   colorStops: ColorStops
   easing?: EasingFunction
 }
+
+type ColorInterpolateFunction = (input: number) => string
+
+const easeInOut = Easing.bezier(0.42, 0, 0.58, 1)
+const TOTAL_STOPS_PER_STEP = 16
 
 function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
   const colors: string[] = []
@@ -36,11 +39,20 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
 
     const startColor = colorStops[startLocation].color
     const endColor = colorStops[endLocation].color
-    const colorScale = interpolate([startColor, endColor])
+    const currentEasing = colorStops[startLocation].easing ?? easing
+
+    const interpolationConfig: Animated.InterpolationConfigType = {
+      inputRange: [0, 1],
+      outputRange: [startColor, endColor],
+      easing: currentEasing,
+    }
+
+    const colorScale: ColorInterpolateFunction = AnimatedInterpolation.__createInterpolation(
+      interpolationConfig
+    )
 
     const stepSize = endLocation - startLocation
     const frameSize = 1 / (TOTAL_STOPS_PER_STEP - 1)
-    const currentEasing = colorStops[startLocation].easing ?? easing
 
     for (
       let frameIndex = 0;
@@ -48,7 +60,7 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
       frameIndex++
     ) {
       const progress = frameIndex * frameSize
-      const color = colorScale(currentEasing(progress))
+      const color = colorScale(progress)
       colors.push(color)
       locations.push(startLocation + stepSize * progress)
     }
