@@ -1,6 +1,5 @@
-import { Easing, EasingFunction, Animated } from 'react-native'
-// @ts-expect-error
-import AnimatedInterpolation from 'react-native/Libraries/Animated/src/nodes/AnimatedInterpolation'
+import { Easing, EasingFunction } from 'react-native'
+import { createInterpolation } from './create-interpolation'
 
 interface ColorStops {
   [location: number]: {
@@ -13,8 +12,6 @@ interface GradientParams {
   colorStops: ColorStops
   easing?: EasingFunction
 }
-
-type ColorInterpolateFunction = (input: number) => string
 
 const easeInOut = Easing.bezier(0.42, 0, 0.58, 1)
 const TOTAL_STOPS_PER_TRANSITION = 16
@@ -41,15 +38,11 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
     const endColor = colorStops[endLocation].color
     const currentEasing = colorStops[startLocation].easing ?? easing
 
-    const interpolationConfig: Animated.InterpolationConfigType = {
+    const colorScale = createInterpolation({
       inputRange: [0, 1],
       outputRange: [startColor, endColor],
       easing: currentEasing,
-    }
-
-    const colorScale: ColorInterpolateFunction = AnimatedInterpolation.__createInterpolation(
-      interpolationConfig
-    )
+    })
 
     const currentTransitionLength = endLocation - startLocation
     const stepSize = 1 / (TOTAL_STOPS_PER_TRANSITION - 1)
