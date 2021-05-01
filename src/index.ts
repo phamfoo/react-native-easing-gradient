@@ -17,7 +17,7 @@ interface GradientParams {
 type ColorInterpolateFunction = (input: number) => string
 
 const easeInOut = Easing.bezier(0.42, 0, 0.58, 1)
-const TOTAL_STOPS_PER_STEP = 16
+const TOTAL_STOPS_PER_TRANSITION = 16
 
 function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
   const colors: string[] = []
@@ -51,18 +51,18 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
       interpolationConfig
     )
 
-    const stepSize = endLocation - startLocation
-    const frameSize = 1 / (TOTAL_STOPS_PER_STEP - 1)
+    const currentTransitionLength = endLocation - startLocation
+    const stepSize = 1 / (TOTAL_STOPS_PER_TRANSITION - 1)
 
     for (
-      let frameIndex = 0;
-      frameIndex <= TOTAL_STOPS_PER_STEP - 1;
-      frameIndex++
+      let stepIndex = 0;
+      stepIndex <= TOTAL_STOPS_PER_TRANSITION - 1;
+      stepIndex++
     ) {
-      const progress = frameIndex * frameSize
+      const progress = stepIndex * stepSize
       const color = colorScale(progress)
       colors.push(color)
-      locations.push(startLocation + stepSize * progress)
+      locations.push(startLocation + currentTransitionLength * progress)
     }
   }
 
