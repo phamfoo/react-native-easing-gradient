@@ -1,7 +1,7 @@
 {
   "name": "react-native-easing-gradient",
   "description": "Create smooth gradients in React Native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Tien Pham",
   "main": "lib/commonjs/index.js",
   "license": "MIT",
