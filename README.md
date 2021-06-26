@@ -16,7 +16,7 @@ From https://larsenwork.com/easing-gradients/
 
 ```js
 import { LinearGradient } from 'expo-linear-gradient'
-import easeGradient from 'react-native-easing-gradient'
+import { easeGradient } from 'react-native-easing-gradient'
 
 const { colors, locations } = easeGradient({
   colorStops: {
