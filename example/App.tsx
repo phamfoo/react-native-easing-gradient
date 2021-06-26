@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import easeGradient from 'react-native-easing-gradient'
+import { easeGradient } from 'react-native-easing-gradient'
 import { Text } from 'react-native'
 
 const BACKGROUND_COLOR = '#18181B'

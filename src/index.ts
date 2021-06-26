@@ -62,4 +62,4 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
   return { colors, locations }
 }
 
-export default easeGradient
+export { easeGradient }
