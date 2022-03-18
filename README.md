@@ -49,19 +49,19 @@ const { colors, locations } = easeGradient({
   colorStops: {
     0: {
       color: 'transparent',
-      // This color stop will now use `Easing.linear` instead of `Easing.ease`
+      // The transition from `0` to `1` will now use `Easing.linear` instead of `Easing.ease`
       easing: Easing.linear,
     },
     1: {
       color: '#18181B',
     },
   },
-  // The easing function used on all color stops, defaults to `ease-in-out` (Easing.bezier(0.42, 0, 0.58, 1))
+  // The easing function used on all transitions, defaults to `ease-in-out` (Easing.bezier(0.42, 0, 0.58, 1))
   easing: Easing.ease,
 })
 ```
 
-Or the amount of extra color stops added between each transition
+Or the amount of extra color stops added to each transition
 
 ```js
 const { colors, locations } = easeGradient({
