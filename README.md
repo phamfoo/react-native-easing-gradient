@@ -61,6 +61,23 @@ const { colors, locations } = easeGradient({
 })
 ```
 
+Or the amount of extra color stops added between each transition
+
+```js
+const { colors, locations } = easeGradient({
+  colorStops: {
+    0: {
+      color: 'transparent',
+    },
+    1: {
+      color: '#18181B',
+    },
+  },
+  // The more color stops added, the smoother the transition is
+  // Defaults to 12
+  extraColorStopsPerTransition: 16
+})
+```
 ## Credits
 
 - [Easing Linear Gradients](https://css-tricks.com/easing-linear-gradients/)

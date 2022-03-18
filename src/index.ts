@@ -10,13 +10,13 @@ interface ColorStops {
 
 interface GradientParams {
   colorStops: ColorStops
+  extraColorStopsPerTransition?: number
   easing?: EasingFunction
 }
 
 const easeInOut = Easing.bezier(0.42, 0, 0.58, 1)
-const TOTAL_STOPS_PER_TRANSITION = 16
 
-function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
+function easeGradient({ colorStops, easing = easeInOut, extraColorStopsPerTransition = 12 }: GradientParams) {
   const colors: string[] = []
   const locations: number[] = []
 
@@ -45,11 +45,11 @@ function easeGradient({ colorStops, easing = easeInOut }: GradientParams) {
     })
 
     const currentTransitionLength = endLocation - startLocation
-    const stepSize = 1 / (TOTAL_STOPS_PER_TRANSITION - 1)
+    const stepSize = 1 / (extraColorStopsPerTransition + 1)
 
     for (
       let stepIndex = 0;
-      stepIndex <= TOTAL_STOPS_PER_TRANSITION - 1;
+      stepIndex <= extraColorStopsPerTransition + 1;
       stepIndex++
     ) {
       const progress = stepIndex * stepSize
