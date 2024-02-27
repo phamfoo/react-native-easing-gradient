@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": "tienphaw"
+  "extends": "react-app"
 }

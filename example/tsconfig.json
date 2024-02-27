@@ -3,14 +3,20 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "react-native-easing-gradient": ["../src/index"]
+      "react-native-easing-gradient": [
+        "../src/index"
+      ]
     }
-  }
+  },
+  "extends": "expo/tsconfig.base"
 }
